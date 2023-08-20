@@ -1,0 +1,11 @@
+@use "../../../styles/util/index" as var;
+
+.header {
+  background-color: var.$primary-color;
+  .navigation {
+    margin: var.$site-margin;
+  }
+  a{
+    margin-left: 32px;
+  }
+}
