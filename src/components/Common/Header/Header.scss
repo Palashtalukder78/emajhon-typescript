@@ -8,4 +8,9 @@
   a{
     margin-left: 32px;
   }
+  @media screen and (max-width: 768px) {
+    .navigation {
+        margin: 0 20px; /* Adjust the margin as needed for small devices */
+    }
+}
 }

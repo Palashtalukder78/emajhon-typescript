@@ -1,0 +1,32 @@
+@use "../../styles/util/index" as var;
+@import "../../styles/base/index";
+
+.home-container {
+  margin: var.$site-margin;
+  margin-top: 50px;
+  p {
+    color: var.$secondary-color;
+  }
+  button {
+    @include buttonStyle(var.$secondary-color, #000, 1px solid pink);
+  }
+  .cover-container {
+    background-color: var.$secondary-light;
+    position: static;
+    border-radius: 10px;
+    img {
+      margin-left: 7px;
+      position: relative;
+      bottom: 15px;
+      left: 6px;
+      border-radius: 10px;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .home-container {
+    margin: 0 20px;
+    margin-top: 20px; /* Adjust the margin value as needed for small devices */
+  }
+}

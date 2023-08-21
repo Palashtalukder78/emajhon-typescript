@@ -7,6 +7,11 @@
     outline: none;
     font-family: 'Poppins', sans-serif;
 }
-.site-container{
-    margin: 0 112px;
+
+
+@mixin buttonStyle ($bg-color, $color, $border) {
+    background-color: $bg-color;
+    color: $color;
+    border: $border;
 }
+
