@@ -12,7 +12,7 @@ const Menus = ({ displayStyle }: DisplaytypeProps) => {
       {displayStyle.display === "inline" ? (
         <div>
           <NavLink
-            to="/order"
+            to="/products"
             style={({ isActive }) => {
               return {
                 color: isActive ? "pink" : "white",
@@ -20,7 +20,7 @@ const Menus = ({ displayStyle }: DisplaytypeProps) => {
               };
             }}
           >
-            Order
+            Products
           </NavLink>
           <NavLink
             to="/order-review"

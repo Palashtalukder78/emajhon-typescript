@@ -1,0 +1,7 @@
+@use "../../styles/util/index" as var;
+
+.single-product-container{
+    button{
+        background-color: var.$secondary-light;
+    }
+}

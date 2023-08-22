@@ -19,14 +19,6 @@ const Header = () => {
           </NavLink>
         </section>
         <section>
-          {/* {windowWidth > 400 ? (
-            <Menus displayStyle = {displayStyle}/>
-          ) : (
-            <button>
-              <BarsArrowDownIcon className="h-6 w-6 text-blue-500" />
-            </button>
-          )}  */}
-
           {windowWidth > 400 ? (
             <Menus displayStyle={inlineStyle} />
           ) : (

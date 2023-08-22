@@ -1,0 +1,14 @@
+@use "../../styles/util/index" as var;
+
+.products-container{
+    margin: var.$site-margin;
+    margin-top: 50px;
+}
+.summary{
+    background-color: var.$secondary-light;
+}
+@media (max-width: 767px) {
+  .products-container {
+    margin: 20px;
+  }
+}
