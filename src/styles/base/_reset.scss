@@ -1,3 +1,5 @@
+
+
 *{
     margin: 0;
     padding: 0;
@@ -8,11 +10,32 @@
     font-family: 'Poppins', sans-serif;
 }
 
-
-@mixin buttonStyle ($bg-color, $color, $border) {
+/* @mixin buttonStyle ($bg-color, $color, $border) {
     background-color: $bg-color;
     color: $color;
     border: $border;
+} */
+
+.btn{
+    padding: 8px 20px;
+    border-radius: 5PX;
 }
 
+@mixin mybuttonStyle ($value, $background){
+
+    @if $value == PRIMARY {
+        @extend .btn;
+        color: black;
+        background-color: $background;
+    }
+    @else if $value == SECONDARY{
+        @extend .btn;
+        color: white;
+        background-color: $background;
+        display: block;
+        margin-bottom: 20px;
+        width: 100%;
+        padding: 5px 0;
+    }
+}
 

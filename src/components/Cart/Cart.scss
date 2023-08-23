@@ -1,20 +1,11 @@
 @use "../../styles/util/index" as var;
-
+@import "../../styles/base/index";
 
 .buttonContainer{
-    button{
-        display: block;
-        margin-bottom: 20px;
-        color: #fff;
-        border-radius: 6px;
-        width: 100%;
-        padding: 5px 0;
-    }
     .cart-button{
-        background-color: var.$secondary-color;
-        
+        @include mybuttonStyle(SECONDARY, var.$secondary-color)
     }
     .checkout-button{
-        background-color: blue;
+        @include mybuttonStyle(SECONDARY, BLUE)
     }
 }

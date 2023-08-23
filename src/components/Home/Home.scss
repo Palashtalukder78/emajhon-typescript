@@ -8,7 +8,7 @@
     color: var.$secondary-color;
   }
   button {
-    @include buttonStyle(var.$secondary-color, #000, 1px solid pink);
+    @include mybuttonStyle(PRIMARY, var.$secondary-color);
   }
   .cover-container {
     background-color: var.$secondary-light;
@@ -19,6 +19,14 @@
       position: relative;
       bottom: 15px;
       left: 6px;
+      border-radius: 10px;
+      transition: 0.4s;
+    }
+    img:hover {
+      margin-left: -7px;
+      position: relative;
+      bottom: -15px;
+      left: -6px;
       border-radius: 10px;
     }
   }
