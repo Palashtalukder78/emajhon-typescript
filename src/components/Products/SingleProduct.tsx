@@ -14,10 +14,13 @@ type productType = {
   shipping: number;
   quantity: number;
 };
+type handleCartType ={
+  (id: string) : void
+} 
 
+const SingleProduct = ( {product,handleCart} : { product: productType, handleCart: handleCartType}) => {
 
-const SingleProduct = ({ product }: { product: productType }) => {
-  const {id,img,name, seller,price,ratings} = product;
+  const { id, img, name, seller, price, ratings } = product;
   return (
     <div className="border  relative h-80 single-product-container rounded">
       <section className="p-2">
@@ -32,7 +35,7 @@ const SingleProduct = ({ product }: { product: productType }) => {
           <p className="text-xs">Manufacturer : {seller}</p>
           <p className="text-xs">Rating : {ratings}</p>
         </div>
-        <button className="w-full p-1 flex items-center justify-center gap-2">
+        <button className="p-1 flex items-center justify-center gap-2" onClick={()=>handleCart(id)}>
           <p>Add to card </p>
           <ShoppingCartIcon className="h-5 w-5 text-black" />
         </button>
