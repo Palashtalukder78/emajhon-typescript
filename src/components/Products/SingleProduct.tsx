@@ -35,7 +35,7 @@ const SingleProduct = ( {product,handleCart} : { product: productType, handleCar
           <p className="text-xs">Manufacturer : {seller}</p>
           <p className="text-xs">Rating : {ratings}</p>
         </div>
-        <button className="p-1 flex items-center justify-center gap-2" onClick={()=>handleCart(id)}>
+        <button className="p-1 flex items-center justify-center gap-2" onClick={()=>handleCart(product)}>
           <p>Add to card </p>
           <ShoppingCartIcon className="h-5 w-5 text-black" />
         </button>

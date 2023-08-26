@@ -14,21 +14,27 @@ type cartType = {
   quantity: number;
 }[];
 const Cart = ({ cart }: { cart: cartType }) => {
-  console.log(cart);
   let total = 0;
   let tax = 0;
   let shippingCost = 0;
   let grandTotal = 0;
+  let quantity = 0;
   for (const product of cart) {
-    total = total + product.price;
-    tax = (5 * total) / 100;
-    shippingCost = (1 * total) / 100;
-    grandTotal = total + tax + shippingCost;
+    /* if(product.quantity === 0){
+      product.quantity = 1;
+    } */
+    // product.quantity = product.quantity || 1;
+    total = total + product.price * product.quantity;
+    
+    quantity = quantity + product.quantity;
   }
+  tax = (5 * total) / 100;
+  shippingCost = (1 * total) / 100;
+  grandTotal = total + tax + shippingCost;
   return (
     <div>
       <section>
-        <h4 className="text-sm sm:text-md">Number of Product: {cart.length}</h4>
+        <h4 className="text-sm sm:text-md">Number of Product: {quantity}</h4>
         <h5 className="text-sm sm:text-md">Price : ${total.toFixed(2)}</h5>
         <h5 className="text-sm sm:text-md">Tax: ${tax.toFixed(2)}</h5>
         <h5 className="text-sm sm:text-md">
