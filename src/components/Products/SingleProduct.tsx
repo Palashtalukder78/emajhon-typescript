@@ -1,26 +1,19 @@
 import './SingleProduct.scss'
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
+import {productType} from "./ProductsType/productsType.js";
 
-type productType = {
-  id: string;
-  category: string;
-  name: string;
-  seller: string;
-  price: number;
-  stock: number;
-  ratings: number;
-  ratingsCount: number;
-  img: string;
-  shipping: number;
-  quantity: number;
-};
 type handleCartType ={
   (id: string) : void
 } 
 
-const SingleProduct = ( {product,handleCart} : { product: productType, handleCart: handleCartType}) => {
+type singleProductTypeProps ={
+    product : productType;
+    handleCart: handleCartType;
+}
 
-  const { id, img, name, seller, price, ratings } = product;
+const SingleProduct : React.FC<singleProductTypeProps> = ({product,handleCart}) => {
+
+  const { img, name, seller, price, ratings } = product;
   return (
     <div className="border  relative h-80 single-product-container rounded">
       <section className="p-2">
@@ -30,7 +23,7 @@ const SingleProduct = ( {product,handleCart} : { product: productType, handleCar
         </h4>
         <h5 className="text-sm">Price: ${price}</h5>
       </section>
-      <section className="absolute bottom-0">
+      <section className="absolute bottom-0 block">
         <div className="p-2">
           <p className="text-xs">Manufacturer : {seller}</p>
           <p className="text-xs">Rating : {ratings}</p>

@@ -3,11 +3,13 @@ import "./Products.scss";
 import SingleProduct from "./SingleProduct";
 import Cart from "../Cart/Cart";
 import { addToDb, getShoppingCart } from "../../utilities/fakedb.js";
-import {productType} from "./ProductsType/productsType.js";
+import {productsType} from "./ProductsType/productsType.js";
 
-const Products = () => {
-  const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
+type ProductType = productsType[number];
+
+const Products: React.FC = () => {
+  const [products, setProducts] = useState < ProductType>([]);
+  const [cart, setCart] = useState<ProductType>([]);
 
   useEffect(() => {
     fetch("./products.json")
@@ -17,9 +19,10 @@ const Products = () => {
 
   useEffect(()=>{
     const storedCart = getShoppingCart();
-    const addedCart = []; 
+    const addedCart: ProductType[] = []; 
+
     for(const id in storedCart){
-      const addedProducts = products.find(product=>product.id ===id);
+      const addedProducts = products.find((product:ProductType)=>product.id ===id);
       if(addedProducts){
         addedProducts.quantity = storedCart[id]; 
         addedCart.push(addedProducts);
@@ -28,7 +31,7 @@ const Products = () => {
     setCart(addedCart);
   },[products])
 
-  const handleCart = (product) => {
+  const handleCart = (product:productsType) => {
     let newCart = [];
     const exist = cart.find(pd => pd.id === product.id);
     console.log(exist)
@@ -37,7 +40,7 @@ const Products = () => {
       newCart = [...cart, product]
     }else{
       exist.quantity = exist.quantity + 1;
-      const remaining = cart.filter(pd => pd.id !== product.id);
+      const remaining = cart.filter((pd:ProductType) => pd.id !== product.id);
       newCart= [...remaining, exist];
     }
     setCart(newCart);
@@ -49,7 +52,7 @@ const Products = () => {
     <div className="grid grid-cols-6 relative">
       <section className="col-span-4 sm:col-span-5 products-container">
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-          {products.map((product ) => (
+          {products.map((product:ProductType ) => (
             <SingleProduct
               key={product.id}
               product={product}

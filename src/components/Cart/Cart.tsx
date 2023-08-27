@@ -1,19 +1,9 @@
 import './Cart.scss';
+import {productType} from "../Products/ProductsType/productsType.js";
 
-type cartType = {
-  id: string;
-  category: string;
-  name: string;
-  seller: string;
-  price: number;
-  stock: number;
-  ratings: number;
-  ratingsCount: number;
-  img: string;
-  shipping: number;
-  quantity: number;
-}[];
-const Cart = ({ cart }: { cart: cartType }) => {
+type cartType = productType[number]
+
+const Cart: React.FC<cartType> = ({cart}:{cart:cartType}) => {
   let total = 0;
   let tax = 0;
   let shippingCost = 0;
