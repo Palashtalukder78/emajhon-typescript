@@ -15,7 +15,7 @@ const SingleProduct : React.FC<singleProductTypeProps> = ({product,handleCart}) 
 
   const { img, name, seller, price, ratings } = product;
   return (
-    <div className="border  relative h-80 single-product-container rounded">
+    <div className="border relative h-80 single-product-container rounded">
       <section className="p-2">
         <img className="rounded" src={img} alt="" />
         <h4 className="text-sm" title={name}>
@@ -28,7 +28,10 @@ const SingleProduct : React.FC<singleProductTypeProps> = ({product,handleCart}) 
           <p className="text-xs">Manufacturer : {seller}</p>
           <p className="text-xs">Rating : {ratings}</p>
         </div>
-        <button className="p-1 flex items-center justify-center gap-2" onClick={()=>handleCart(product)}>
+        <button
+          className="p-1 flex items-center justify-center gap-2"
+          onClick={() => handleCart(product)}
+        >
           <p>Add to card </p>
           <ShoppingCartIcon className="h-5 w-5 text-black" />
         </button>

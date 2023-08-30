@@ -8,6 +8,7 @@ import ManageLibrary from './components/ManageLibrary/ManageLibrary.tsx';
 import Login from './components/Login/Login.tsx';
 import OrderReview from './components/OrderReview/OrderReview.tsx';
 import Products from './components/Products/Products.tsx';
+import CartProductLoader from "./loaders/CartProducts.js";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
       {
         path: "/order-review",
         element: <OrderReview />,
+        loader: CartProductLoader,
       },
       {
         path: "/manage-library",

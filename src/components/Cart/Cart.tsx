@@ -22,8 +22,9 @@ const Cart: React.FC<cartType> = ({cart}:{cart:cartType}) => {
   shippingCost = (1 * total) / 100;
   grandTotal = total + tax + shippingCost;
   return (
-    <div>
+    <div className="cart-container sticky top-0 p-4 h-full">
       <section>
+        <h1 className="text-xl sm:text-3xl text-center mb-6">Summary</h1>
         <h4 className="text-sm sm:text-md">Number of Product: {quantity}</h4>
         <h5 className="text-sm sm:text-md">Price : ${total.toFixed(2)}</h5>
         <h5 className="text-sm sm:text-md">Tax: ${tax.toFixed(2)}</h5>

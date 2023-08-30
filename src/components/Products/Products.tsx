@@ -3,12 +3,12 @@ import "./Products.scss";
 import SingleProduct from "./SingleProduct";
 import Cart from "../Cart/Cart";
 import { addToDb, getShoppingCart } from "../../utilities/fakedb.js";
-import {productsType} from "./ProductsType/productsType.js";
+import { productsType } from "./ProductsType/productsType.js";
 
 type ProductType = productsType[number];
 
 const Products: React.FC = () => {
-  const [products, setProducts] = useState < ProductType>([]);
+  const [products, setProducts] = useState<ProductType>([]);
   const [cart, setCart] = useState<ProductType>([]);
 
   useEffect(() => {
@@ -17,42 +17,43 @@ const Products: React.FC = () => {
       .then((data) => setProducts(data));
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     const storedCart = getShoppingCart();
-    const addedCart: ProductType[] = []; 
+    const addedCart: ProductType[] = [];
 
-    for(const id in storedCart){
-      const addedProducts = products.find((product:ProductType)=>product.id ===id);
-      if(addedProducts){
-        addedProducts.quantity = storedCart[id]; 
+    for (const id in storedCart) {
+      const addedProducts = products.find(
+        (product: ProductType) => product.id === id
+      );
+      if (addedProducts) {
+        addedProducts.quantity = storedCart[id];
         addedCart.push(addedProducts);
       }
     }
     setCart(addedCart);
-  },[products])
+  }, [products]);
 
-  const handleCart = (product:productsType) => {
+  const handleCart = (product: productsType) => {
     let newCart = [];
-    const exist = cart.find(pd => pd.id === product.id);
-    console.log(exist)
-    if (!exist){
+    const exist = cart.find((pd) => pd.id === product.id);
+    console.log(exist);
+    if (!exist) {
       product.quantity = 1;
-      newCart = [...cart, product]
-    }else{
+      newCart = [...cart, product];
+    } else {
       exist.quantity = exist.quantity + 1;
-      const remaining = cart.filter((pd:ProductType) => pd.id !== product.id);
-      newCart= [...remaining, exist];
+      const remaining = cart.filter((pd: ProductType) => pd.id !== product.id);
+      newCart = [...remaining, exist];
     }
     setCart(newCart);
     addToDb(product.id);
   };
- 
 
   return (
     <div className="grid grid-cols-6 relative">
       <section className="col-span-4 sm:col-span-5 products-container">
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-          {products.map((product:ProductType ) => (
+          {products.map((product: ProductType) => (
             <SingleProduct
               key={product.id}
               product={product}
@@ -61,9 +62,8 @@ const Products: React.FC = () => {
           ))}
         </div>
       </section>
-      <section className="col-span-2 sm:col-span-1 summary sticky top-0 p-4">
-        <h1 className="text-xl sm:text-3xl text-center mb-6">Summary</h1>
-        <Cart cart={cart} />
+      <section className="col-span-2 sm:col-span-1 ">
+        <Cart cart={cart}/>
       </section>
     </div>
   );
