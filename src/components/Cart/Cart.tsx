@@ -1,28 +1,25 @@
 import './Cart.scss';
 import {productType} from "../Products/ProductsType/productsType.js";
+import { ArchiveBoxXMarkIcon } from '@heroicons/react/24/solid';
 
 type cartType = productType[number]
 
-const Cart: React.FC<cartType> = ({cart}:{cart:cartType}) => {
+const Cart: React.FC<cartType> = ({ cart, handleDeleteCart, children }: { cart: cartType, children: React.ReactNode}) => {
   let total = 0;
   let tax = 0;
   let shippingCost = 0;
   let grandTotal = 0;
   let quantity = 0;
   for (const product of cart) {
-    /* if(product.quantity === 0){
-      product.quantity = 1;
-    } */
-    // product.quantity = product.quantity || 1;
     total = total + product.price * product.quantity;
-    
+
     quantity = quantity + product.quantity;
   }
   tax = (5 * total) / 100;
   shippingCost = (1 * total) / 100;
   grandTotal = total + tax + shippingCost;
   return (
-    <div className="cart-container sticky top-0 p-4 h-full">
+    <div className="cart-container sticky top-0 p-4">
       <section>
         <h1 className="text-xl sm:text-3xl text-center mb-6">Summary</h1>
         <h4 className="text-sm sm:text-md">Number of Product: {quantity}</h4>
@@ -36,8 +33,14 @@ const Cart: React.FC<cartType> = ({cart}:{cart:cartType}) => {
         </h1>
       </section>
       <section className="buttonContainer">
-        <button className="cart-button text-sm sm:text-lg">Add to Cart</button>
-        <button className="checkout-button text-sm sm:text-lg">CheckOut</button>
+        <button
+          className="cart-button text-sm sm:text-md flex items-center justify-center"
+          onClick={handleDeleteCart}
+        >
+          <p> Clear cart</p>
+          <ArchiveBoxXMarkIcon className="h-5 w-5  ml-3" />
+        </button>
+        {children}
       </section>
     </div>
   );

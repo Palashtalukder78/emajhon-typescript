@@ -2,8 +2,14 @@ import { useEffect, useState } from "react";
 import "./Products.scss";
 import SingleProduct from "./SingleProduct";
 import Cart from "../Cart/Cart";
-import { addToDb, getShoppingCart } from "../../utilities/fakedb.js";
+import {
+  addToDb,
+  getShoppingCart,
+  deleteShoppingCart,
+} from "../../utilities/fakedb.js";
 import { productsType } from "./ProductsType/productsType.js";
+import { ArrowRightIcon } from "@heroicons/react/24/solid";
+import { Link } from "react-router-dom";
 
 type ProductType = productsType[number];
 
@@ -16,6 +22,8 @@ const Products: React.FC = () => {
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);
+
+  
 
   useEffect(() => {
     const storedCart = getShoppingCart();
@@ -36,7 +44,6 @@ const Products: React.FC = () => {
   const handleCart = (product: productsType) => {
     let newCart = [];
     const exist = cart.find((pd) => pd.id === product.id);
-    console.log(exist);
     if (!exist) {
       product.quantity = 1;
       newCart = [...cart, product];
@@ -47,6 +54,11 @@ const Products: React.FC = () => {
     }
     setCart(newCart);
     addToDb(product.id);
+  };
+
+  const handleDeleteCart = () => {
+    setCart([]);
+    deleteShoppingCart()
   };
 
   return (
@@ -63,7 +75,14 @@ const Products: React.FC = () => {
         </div>
       </section>
       <section className="col-span-2 sm:col-span-1 ">
-        <Cart cart={cart}/>
+        <Cart cart={cart} handleDeleteCart={handleDeleteCart}>
+          <Link to="/order-review">
+            <button className="checkout-button text-sm sm:text-md flex items-center justify-center">
+              <p>Review Order</p>
+              <ArrowRightIcon className="h-5 w-5 icon-color ml-3" />
+            </button>
+          </Link>
+        </Cart>
       </section>
     </div>
   );
