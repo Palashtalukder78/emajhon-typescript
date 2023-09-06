@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CoverPhoto from "../../../src/assets/images/cover.jpg";
 import './Home.scss';
 
@@ -12,7 +13,9 @@ const Home = () => {
             Discover all the new arrivals of ready-to-wear collection.
           </h6>
         </div>
-        <button className="rounded-sm p-2">SHOP NOW</button>
+        <Link to="/products">
+          <button className="rounded-sm p-2">SHOP NOW</button>
+        </Link>
       </section>
 
       <section className="cover-container w-40 sm:w-64">

@@ -7,9 +7,11 @@ import {
   getShoppingCart,
   deleteShoppingCart,
 } from "../../utilities/fakedb.js";
+
 import { productsType } from "./ProductsType/productsType.js";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 type ProductType = productsType[number];
 
@@ -22,8 +24,6 @@ const Products: React.FC = () => {
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);
-
-  
 
   useEffect(() => {
     const storedCart = getShoppingCart();
@@ -43,22 +43,30 @@ const Products: React.FC = () => {
 
   const handleCart = (product: productsType) => {
     let newCart = [];
-    const exist = cart.find((pd) => pd.id === product.id);
-    if (!exist) {
-      product.quantity = 1;
-      newCart = [...cart, product];
+    const exist = cart.find((pd: productsType) => pd.id === product.id);
+    if (exist) {
+      toast.error("You Have already add this !")
     } else {
-      exist.quantity = exist.quantity + 1;
-      const remaining = cart.filter((pd: ProductType) => pd.id !== product.id);
-      newCart = [...remaining, exist];
+      if (!exist) {
+        product.quantity = 1;
+        newCart = [...cart, product];
+      } else {
+        exist.quantity = exist.quantity + 1;
+        const remaining = cart.filter(
+          (pd: ProductType) => pd.id !== product.id
+        );
+        newCart = [...remaining, exist];
+      }
+      setCart(newCart);
+      addToDb(product.id);
+      
     }
-    setCart(newCart);
-    addToDb(product.id);
   };
 
   const handleDeleteCart = () => {
     setCart([]);
-    deleteShoppingCart()
+    deleteShoppingCart();
+    toast.success("Successfully Deleted Cart!");
   };
 
   return (

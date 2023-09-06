@@ -7,7 +7,7 @@ import SingleOrderReview from "./SingleOrderReview.js";
 import { useState } from "react";
 import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 // import Products from "../Products/Products.js";
-
+import toast from "react-hot-toast";
 type CartType = productsType[];
 
 const OrderReview: React.FC = () => {
@@ -18,11 +18,14 @@ const OrderReview: React.FC = () => {
     const restCart = myCart.filter((product) => product.id !== id);
     setMyCart(restCart);
     removeFromDb(id)
+    const deletedItem = myCart.find((product: CartType) => product.id === id);
+    toast.success(`Successfully Deleted ${deletedItem.name} from Cart!`);
   }
 
   const handleDeleteCart = () => {
     setMyCart([]);
     deleteShoppingCart();
+    toast.success("Successfully deleted all products from Cart!");
   };
 
   return cart.length < 1 ? (

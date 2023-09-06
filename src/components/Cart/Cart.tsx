@@ -3,8 +3,19 @@ import {productType} from "../Products/ProductsType/productsType.js";
 import { ArchiveBoxXMarkIcon } from '@heroicons/react/24/solid';
 
 type cartType = productType[number]
+type handleDeleteCartType = {
+  handleDeleteCart: void;
+};
 
-const Cart: React.FC<cartType> = ({ cart, handleDeleteCart, children }: { cart: cartType, children: React.ReactNode}) => {
+const Cart: React.FC<cartType> = ({
+  cart,
+  handleDeleteCart,
+  children,
+}: {
+  cart: cartType;
+  children: React.ReactNode;
+  handleDeleteCart: handleDeleteCartType;
+}) => {
   let total = 0;
   let tax = 0;
   let shippingCost = 0;
