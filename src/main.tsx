@@ -9,6 +9,8 @@ import Login from './components/Login/Login.tsx';
 import OrderReview from './components/OrderReview/OrderReview.tsx';
 import Products from './components/Products/Products.tsx';
 import CartProductLoader from "./loaders/CartProducts.js";
+import Register from './components/Register/Register.tsx';
+import ForgotPassword from './components/ForgotPassword/ForgotPassword.tsx';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +37,14 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgotPassword />,
       },
     ],
   },
