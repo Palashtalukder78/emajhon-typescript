@@ -1,12 +1,32 @@
 import { NavLink } from 'react-router-dom';
-import { CSSProperties } from "react";
+import { CSSProperties, useContext } from "react";
 import { BarsArrowDownIcon } from "@heroicons/react/24/solid";
+import { AuthContext } from '../../../providers/authProvider';
+import toast from 'react-hot-toast';
 
 type DisplaytypeProps = {
   displayStyle: CSSProperties;
 };
 
 const Menus = ({ displayStyle }: DisplaytypeProps) => {
+  const {user, logout} = useContext(AuthContext);
+
+  const handleLogout =()=>{
+    logout()
+      .then((result) => {
+        toast.success("Logout Successfully");
+      })
+      .catch((errorText) => {
+        const error = errorText.message;
+        const startIndex = error.indexOf("(") + 1;
+        const endIndex = error.indexOf(")");
+        const errorMessage = error.slice(startIndex, endIndex).trim();
+
+        const parts = errorMessage.split("/");
+        const desiredMessage = parts[1] || parts[0];
+        toast.error(desiredMessage);
+      });
+  }
   return (
     <>
       {displayStyle.display === "inline" ? (
@@ -44,17 +64,21 @@ const Menus = ({ displayStyle }: DisplaytypeProps) => {
           >
             Manage Library
           </NavLink>
-          <NavLink
-            to="/login"
-            style={({ isActive }) => {
-              return {
-                color: isActive ? "pink" : "white",
-                borderBottom: isActive ? "1px solid pink" : "none",
-              };
-            }}
-          >
-            Login
-          </NavLink>
+          {!user ? (
+            <NavLink
+              to="/login"
+              style={({ isActive }) => {
+                return {
+                  color: isActive ? "pink" : "white",
+                  borderBottom: isActive ? "1px solid pink" : "none",
+                };
+              }}
+            >
+              Login
+            </NavLink>
+          ) : (
+            <button className="btn btn-sm ml-5" onClick={handleLogout}>Logout</button>
+          )}
         </div>
       ) : (
         <div>

@@ -1,6 +1,6 @@
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState, ReactNode, useEffect } from "react";
 import app from "../firebase/Firebase.config";
-import { User, getAuth } from "firebase/auth";
+import { User, getAuth, createUserWithEmailAndPassword, sendEmailVerification, onAuthStateChanged, signInWithEmailAndPassword, sendPasswordResetEmail, signOut } from "firebase/auth";
 
 interface AuthContextProps {
   user: User | null;
@@ -15,16 +15,50 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-const authProvider: React.FC<AuthProviderProps> = ({ children }) => {
+const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  
+  const createUser =(email,password)=>{
+    return createUserWithEmailAndPassword(auth, email, password);
+  }
+  const emailVerify=()=>{
+    return sendEmailVerification(auth.currentUser);
+  }
 
-  const authValue = { user, loading, setLoading };
+  const loginUser = (email,password)=>{
+    return signInWithEmailAndPassword(auth,email,password);
+  }
+
+  const forgotPassword = (email)=>{
+    return sendPasswordResetEmail(auth, email);
+  }
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+  const logout = ()=>{
+    return signOut(auth)
+  }
+  const authValue = {
+    user,
+    loading,
+    setLoading,
+    createUser,
+    emailVerify,
+    loginUser,
+    forgotPassword,
+    logout,
+  };
   return (
     <AuthContext.Provider value={authValue}>{children}</AuthContext.Provider>
   );
 };
 
-export default authProvider;
+export default AuthProvider; 

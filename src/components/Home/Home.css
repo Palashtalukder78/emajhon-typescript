@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  text-decoration: none;
+  outline: none;
+  font-family: "Poppins", sans-serif;
+}
+
+/* @mixin buttonStyle ($bg-color, $color, $border) {
+    background-color: $bg-color;
+    color: $color;
+    border: $border;
+} */
+.btn, .home-container button {
+  padding: 8px 20px;
+  border-radius: 5PX;
+}
+
+.home-container {
+  margin: 0 112px;
+  margin-top: 50px;
+}
+.home-container p {
+  color: #FF9900;
+}
+.home-container button {
+  color: black;
+  background-color: #FF9900;
+}
+.home-container .cover-container {
+  background-color: #FFE0B3;
+  position: static;
+  border-radius: 10px;
+}
+.home-container .cover-container img {
+  margin-left: 7px;
+  position: relative;
+  bottom: 15px;
+  left: 6px;
+  border-radius: 10px;
+  transition: 0.4s;
+}
+.home-container .cover-container img:hover {
+  margin-left: -7px;
+  position: relative;
+  bottom: -15px;
+  left: -6px;
+  border-radius: 10px;
+}
+
+@media (max-width: 640px) {
+  .home-container {
+    margin: 0 20px;
+    margin-top: 20px; /* Adjust the margin value as needed for small devices */
+  }
+}/*# sourceMappingURL=Home.css.map */

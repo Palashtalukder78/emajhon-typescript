@@ -11,6 +11,8 @@ import Products from './components/Products/Products.tsx';
 import CartProductLoader from "./loaders/CartProducts.js";
 import Register from './components/Register/Register.tsx';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword.tsx';
+import AuthProvider from './providers/authProvider.tsx';
+import NotVerified from './components/NotVerified/NotVerified.tsx';
 
 const router = createBrowserRouter([
   {
@@ -46,12 +48,18 @@ const router = createBrowserRouter([
         path: "/forgot-password",
         element: <ForgotPassword />,
       },
+      {
+        path: "/not-verified",
+        element: <NotVerified/>,
+      },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );

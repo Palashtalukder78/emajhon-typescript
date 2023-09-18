@@ -1,5 +1,4 @@
-export type User = {
-    name: string;
+export type register = {
     email: string;
     password: string;
 }
