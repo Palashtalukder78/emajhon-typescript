@@ -22,27 +22,33 @@ const Login = () => {
     const email = emailInput.value;
     const password = passwordInput.value;
 
-    loginUser(email, password)
-      .then((result) => {
-        const isVerifiedUser = result.user.emailVerified;
-        if (!isVerifiedUser) {
-          navigate("/not-verified");
-        }else{
-          setLoading(true)
-          navigate("/");
-          toast.success("Login Successfully")
-        }
-      })
-      .catch((errorText) => {
-        const error = errorText.message;
-        const startIndex = error.indexOf("(") + 1;
-        const endIndex = error.indexOf(")");
-        const errorMessage = error.slice(startIndex, endIndex).trim();
+    if (!email) {
+      toast.error("Email field must not be empty");
+    } else if (!password) {
+      toast.error("Password field must not be empty");
+    } else {
+      loginUser(email, password)
+        .then((result) => {
+          const isVerifiedUser = result.user.emailVerified;
+          if (!isVerifiedUser) {
+            navigate("/not-verified");
+          } else {
+            setLoading(true);
+            navigate("/");
+            toast.success("Login Successfully");
+          }
+        })
+        .catch((errorText) => {
+          const error = errorText.message;
+          const startIndex = error.indexOf("(") + 1;
+          const endIndex = error.indexOf(")");
+          const errorMessage = error.slice(startIndex, endIndex).trim();
 
-        const parts = errorMessage.split("/");
-        const desiredMessage = parts[1] || parts[0];
-        toast.error(desiredMessage);
-      });
+          const parts = errorMessage.split("/");
+          const desiredMessage = parts[1] || parts[0];
+          toast.error(desiredMessage);
+        });
+    }
   };
   return (
     <div className="hero min-h-screen bg-base-200">

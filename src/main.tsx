@@ -13,6 +13,7 @@ import Register from './components/Register/Register.tsx';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword.tsx';
 import AuthProvider from './providers/authProvider.tsx';
 import NotVerified from './components/NotVerified/NotVerified.tsx';
+import Checkout from './components/Checkout/Checkout.tsx';
 
 const router = createBrowserRouter([
   {
@@ -50,7 +51,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/not-verified",
-        element: <NotVerified/>,
+        element: <NotVerified />,
+      },
+      {
+        path: "/checkout",
+        element: <Checkout />,
       },
     ],
   },

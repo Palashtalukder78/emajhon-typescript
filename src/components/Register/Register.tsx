@@ -22,8 +22,16 @@ const Register = () => {
     const email = emailInput.value;
     const password = passwordInput.value;
     const confirmPassword = confirmPasswordInput.value;
-
-    if (!/(?=.*?[A-Z])/.test(password)) {
+    
+    if(!name){
+      toast.error("Name field must not be empty");
+    }else if(!email){
+      toast.error("Email field must not be empty");
+    }else if(!password){
+      toast.error("Password field must not be empty");
+    }else if(!confirmPassword){
+      toast.error("Confirm-Password field must not be empty");
+    }else if (!/(?=.*?[A-Z])/.test(password)) {
       toast.error("Password need at least a capital Letter");
     } else if (!/(?=.*?[a-z])/.test(password)) {
       toast.error("Password need at least a small Letter");

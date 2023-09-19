@@ -5,7 +5,7 @@ import './Home.scss';
 const Home = () => {
   return (
     <div className="home-container flex md:flex flex-col md:flex-row sm:justify-evenly items-center">
-      <section className="h-40 sm:h-56 flex flex-col justify-between items-start border mb-6 sm:mb-0">
+      <section className="h-40 sm:h-56 flex flex-col justify-between items-start  mb-6 sm:mb-0">
         <p className="text-xs">Sale up to 70% off</p>
         <div>
           <h1 className="text-xl sm:text-5xl  ">New Collection For Fall</h1>
