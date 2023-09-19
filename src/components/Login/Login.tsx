@@ -1,5 +1,5 @@
 import { FormEvent, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/authProvider";
 import toast from "react-hot-toast";
 
@@ -13,15 +13,19 @@ const Login = () => {
     AuthContext
   );
   const navigate = useNavigate();
+  const location = useLocation();
+
   const handleLogin = (event: FormEvent) => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const emailInput = form.email as HTMLInputElement;
     const passwordInput = form.password as HTMLInputElement;
-
     const email = emailInput.value;
     const password = passwordInput.value;
+    
 
+    let from = location.state?.from?.pathname || "/";
+    
     if (!email) {
       toast.error("Email field must not be empty");
     } else if (!password) {
@@ -33,8 +37,8 @@ const Login = () => {
           if (!isVerifiedUser) {
             navigate("/not-verified");
           } else {
-            setLoading(true);
-            navigate("/");
+            setLoading(false);
+            navigate(from, { replace: true });
             toast.success("Login Successfully");
           }
         })

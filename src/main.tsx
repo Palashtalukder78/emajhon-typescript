@@ -14,6 +14,7 @@ import ForgotPassword from './components/ForgotPassword/ForgotPassword.tsx';
 import AuthProvider from './providers/authProvider.tsx';
 import NotVerified from './components/NotVerified/NotVerified.tsx';
 import Checkout from './components/Checkout/Checkout.tsx';
+import PrivateRoute from './routes/PrivateRoute.tsx';
 
 const router = createBrowserRouter([
   {
@@ -35,7 +36,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/manage-library",
-        element: <ManageLibrary />,
+        element: (
+          <PrivateRoute>
+            <ManageLibrary />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
@@ -55,7 +60,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/checkout",
-        element: <Checkout />,
+        element: (
+          <PrivateRoute>
+            <Checkout></Checkout>
+          </PrivateRoute>
+        ),
       },
     ],
   },
